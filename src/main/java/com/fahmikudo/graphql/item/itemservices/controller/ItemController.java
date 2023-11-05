@@ -38,6 +38,47 @@ public class ItemController {
         return itemRepository.save(item);
     }
 
+    @MutationMapping(name = "updateItem")
+    public Item updateItem(@Argument (name = "id") Long id, @Argument (name = "itemRequest") ItemRequest itemRequest) {
+        log.info("Item Request {} ", itemRequest);
+
+        ItemCategory itemCategory = itemCategoryRepository.findById(itemRequest.getItemCategoryId())
+                .orElseThrow(() -> new IllegalArgumentException("Item category not found"));
+
+        Item item = itemRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Item not found."));
+
+        item.setItemName(itemRequest.getItemName());
+        item.setPrice(itemRequest.getPrice());
+        item.setItemCategory(itemCategory);
+
+        return itemRepository.save(item);
+    }
+
+    @MutationMapping(name = "deleteItem")
+    public Boolean deleteItem(@Argument(name = "id") Long id) {
+        log.info("Item Id {} ", id);
+
+        Item item = itemRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Item not found."));
+
+        itemRepository.delete(item);
+        return Boolean.TRUE;
+    }
+
+    @QueryMapping
+    public List<Item> items() {
+        log.info("Get All Items");
+        return itemRepository.findAll();
+    }
+
+    @QueryMapping
+    public Item itemById(@Argument Long id) {
+        log.info("Get Item By Id {}", id);
+        return itemRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Item not found."));
+    }
+
     @QueryMapping
     public List<ItemCategory> itemCategories() {
         log.info("Get All Item Categories");

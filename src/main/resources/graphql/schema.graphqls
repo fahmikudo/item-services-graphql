@@ -1,10 +1,14 @@
 type Query {
     itemCategories: [ItemCategory]
     itemCategoryById(id: ID!): ItemCategory
+    items: [Item]
+    itemById(id: ID!): Item
 }
 
 type Mutation {
     createItem(itemRequest: ItemRequest) : Item
+    updateItem(id: ID!, itemRequest: ItemRequest) : Item
+    deleteItem(id: ID!) : Boolean
 }
 
 input ItemRequest {
@@ -25,4 +29,5 @@ type Item {
     id: ID!
     itemName: String!
     price: Int!
+    itemCategory: ItemCategory
 }
