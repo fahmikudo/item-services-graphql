@@ -1,0 +1,28 @@
+type Query {
+    itemCategories: [ItemCategory]
+    itemCategoryById(id: ID!): ItemCategory
+}
+
+type Mutation {
+    createItem(itemRequest: ItemRequest) : Item
+}
+
+input ItemRequest {
+    id: ID!
+    itemName: String!
+    price: Int!
+    itemCategoryId: ID!
+}
+
+type ItemCategory {
+    id: ID!
+    categoryName: String!
+    description: String
+    items: [Item]
+}
+
+type Item {
+    id: ID!
+    itemName: String!
+    price: Int!
+}
