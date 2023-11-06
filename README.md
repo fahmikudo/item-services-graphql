@@ -13,5 +13,8 @@ Simple service to create, update, delete, and get items using GraphQL with MySQL
 
 ## Example
 - Get All Items
+![get-all-items](https://github.com/fahmikudo/item-services-graphql/assets/20161826/877779c3-4dd1-4c1f-a3d4-4440a70eed86)
+
 - Get Item By Id
+![get-item-by-id](https://github.com/fahmikudo/item-services-graphql/assets/20161826/92d0dd9e-1890-432c-92ab-5adb42569205)
 
